@@ -19,7 +19,7 @@ public class FPSController : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 3f;
     float rotationY = 3f;
-    float rotationZ = 3f;
+    //float rotationZ = 3f;
 
     public bool canMove = true;
 
