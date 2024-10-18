@@ -23,7 +23,7 @@ public class Pearl : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            //pearlCounter.instance.IncreasePearls(value);
+            Counter.instance.IncreasePearls(value);
         }
     }
 }
