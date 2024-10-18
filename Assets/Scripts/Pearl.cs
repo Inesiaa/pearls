@@ -18,12 +18,22 @@ public class Pearl : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
             Counter.instance.IncreasePearls(value);
+        }
+
+        if(collision.tag == "Player")
+        {
+            var healthComponent = collision.GetComponent<healthManager>();
+            if(healthComponent != null)
+            {
+                healthComponent.TakeDamage(1);
+                Debug.Log("Collision");
+            }
         }
     }
 }
