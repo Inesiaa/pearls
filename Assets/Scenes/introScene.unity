@@ -249,7 +249,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 850, y: 500}
+  m_SizeDelta: {x: 850, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &495025833
 MonoBehaviour:
@@ -280,8 +280,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294963920
+  m_fontColor: {r: 0.8160377, g: 0.9474396, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -304,9 +304,9 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_fontStyle: 2
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
+  m_wordWrappingRatios: 1
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
@@ -590,9 +590,9 @@ MonoBehaviour:
   - "Cuenta la leyenda que hace muchos a\xF1os una bruja marina obsesionada con el
     poder cre\xF3 una barrera impenetrable alrededor de todo el reino submarino de
     \u201CAestus\u201D para poder controlarlo a su antojo."
-  - " Sin embargo, el encantamiento requer\xEDa de un gran poder que le cost\xF3
-    a la arp\xEDa su cuerpo, reduci\xE9ndola a cenizas que al filtrarse en la arena
-    dio vida a \u201Clos centinelas\u201D, unas criaturas marinas que guardan los
+  - "Sin embargo, el encantamiento requer\xEDa de un gran poder que le cost\xF3 a
+    la arp\xEDa su cuerpo, reduci\xE9ndola a cenizas que al filtrarse en la arena
+    dio vida a \u201CLos Centinelas\u201D, unas criaturas marinas que guardan los
     lindes de la barrera."
   - "Por desgracia, la bruja no muri\xF3 y su alma qued\xF3 encerrada en sus 5 ojos
     en forma de perlas que se perdieron por los terrenos de Aestus."

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class introText : MonoBehaviour
 {
@@ -21,16 +22,17 @@ public class introText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(textComponent.text == lines[index])
+            if (textComponent.text == lines[index])
             {
                 NextLine();
+                //Debug.Log("escape key pressed");
             }
             else
             {
                 StopAllCoroutines();
-                textComponent.text = lines[index];
+                textComponent.text = lines[index];                
             }
         }
     }
@@ -61,6 +63,7 @@ public class introText : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            SceneManager.LoadScene(2); //Carga la escena 2
         }
     }
 }
