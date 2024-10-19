@@ -9,6 +9,7 @@ public class healthManager : MonoBehaviour
     public int maxHealth = 10;
     public int currentHealth;
 
+    public GameObject SpawnPos;
 
     void Start()
     {
@@ -16,23 +17,28 @@ public class healthManager : MonoBehaviour
     }
 
 
-    //void Update()
-    //{
-    //    if(healthAmount <= 0)
-    //    {
-    //        Application.LoadLevel(Application.loadedLevel);
-    //    }
+    void Update()
+    {
+        //if (healthAmount <= 0)
+        //{
+        //    Application.LoadLevel(Application.loadedLevel);
+        //}
 
-    //    if (Input.GetKeyDown(KeyCode.Return))
-    //    {
-    //        TakeDamage(20);
-    //    }
+        //if (Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    TakeDamage(20);
+        //}
 
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        Heal(20);
-    //    }
-    //}
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Heal(20);
+        //}
+        if(currentHealth <= 0)
+        {
+            transform.position = SpawnPos.transform.position;
+            currentHealth = maxHealth;
+        }
+    }
 
     public void TakeDamage(/*float damage*/ int amount)
     {
