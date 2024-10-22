@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class camChanges : MonoBehaviour
 {
-    public GameObject firstPersonCam;
-    public GameObject ThirdPersonCam;
+    public GameObject mapCamVertical;
+    public GameObject mapCamHorizontal;
+    public GameObject miniMapHorizontal;
+    public GameObject miniMapVertical;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,13 +42,19 @@ public class camChanges : MonoBehaviour
 
     void CameraOne()
     {
-        firstPersonCam.SetActive(true);
-        ThirdPersonCam.SetActive(false);
+        mapCamVertical.SetActive(true);
+        mapCamHorizontal.SetActive(false);
+
+        miniMapHorizontal.SetActive(false);
+        miniMapVertical.SetActive(true);
     }
 
     void CameraTwo()
     {
-        ThirdPersonCam.SetActive(true);
-        firstPersonCam.SetActive(false);
+        mapCamHorizontal.SetActive(true);
+        mapCamVertical.SetActive(false);
+
+        miniMapHorizontal.SetActive(true);
+        miniMapVertical.SetActive(false);
     }
 }
