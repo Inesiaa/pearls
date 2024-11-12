@@ -10,6 +10,7 @@ public class healthManager : MonoBehaviour
     public int currentHealth;
 
     public GameObject SpawnPos;
+    public GameObject Player;
 
     void Start()
     {
@@ -35,7 +36,7 @@ public class healthManager : MonoBehaviour
         //}
         if(currentHealth <= 0)
         {
-            transform.position = SpawnPos.transform.position;
+            Player.transform.position = SpawnPos.transform.position;
             currentHealth = maxHealth;
         }
     }
