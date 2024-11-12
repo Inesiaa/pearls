@@ -4,34 +4,68 @@ using UnityEngine;
 
 public class playerMovement : MonoBehaviour
 {
-    public float speed = 10f;
-    public float rotationSpeed = 100.0f;
+    public float moveSpeed = 5f;            // Velocidad de movimiento
+    public float jumpForce = 7f;            // Fuerza de salto
+    public LayerMask groundLayer;           // Capa que define el suelo
+    public float groundCheckDistance = 0.1f; // Distancia para comprobar si está tocando el suelo
 
-    public float jumpSpeed = 1f;
-    public Rigidbody rb;
+    private Rigidbody rb;                   // Componente Rigidbody del jugador
+    private bool isGrounded;                // Si el jugador está tocando el suelo
+
     void Start()
     {
+        // Obtener el componente Rigidbody
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float translation = Input.GetAxis("Vertical") * speed;
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
-        //float jump = Input.GetButtonDown("Jump") * Time.deltaTime * jumpSpeed;
+        // Verificar si el jugador está tocando el suelo
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
 
+        // Mover al jugador
+        MovePlayer();
 
-        translation *= Time.deltaTime; // Make it move 10 meters per second instead of 10 meters per frame...
-        rotation *= Time.deltaTime;
+        // Hacer que el jugador mire hacia el ratón
+        LookAtMouse();
 
-        transform.Translate(0, 0, translation); // Move translation along the object's z-axis
-
-        transform.Rotate(0, rotation, 0); //Rotate around our y-axis  
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Saltar si el jugador está en el suelo y presiona la tecla de salto (espacio)
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector3.up * 50);
+            Jump();
         }
+    }
+
+    // Método para mover al jugador
+    void MovePlayer()
+    {
+        float horizontal = Input.GetAxis("Horizontal"); // A/D o flechas izquierda/derecha
+        float vertical = Input.GetAxis("Vertical");     // W/S o flechas arriba/abajo
+
+        Vector3 moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
+
+        // Aplicar el movimiento al Rigidbody
+        rb.MovePosition(transform.position + moveDirection * moveSpeed * Time.deltaTime);
+    }
+
+    // Método para hacer que el jugador mire hacia donde está el ratón
+    void LookAtMouse()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  // Crear un rayo hacia la posición del ratón
+        RaycastHit hit;
+
+        // Si el rayo golpea algo en el mundo 3D, gira al jugador hacia ese punto
+        if (Physics.Raycast(ray, out hit))
+        {
+            Vector3 lookDirection = hit.point - transform.position;
+            lookDirection.y = 0;  // Solo rotar en el eje Y
+            transform.rotation = Quaternion.LookRotation(lookDirection);
+        }
+    }
+
+    // Método para hacer saltar al jugador
+    void Jump()
+    {
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Salto hacia arriba
     }
 }
