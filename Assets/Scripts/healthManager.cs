@@ -36,7 +36,7 @@ public class healthManager : MonoBehaviour
         //}
         if(currentHealth <= 0)
         {
-            Player.transform.position = SpawnPos.transform.position;
+            transform.position = SpawnPos.transform.position;
             currentHealth = maxHealth;
         }
     }
