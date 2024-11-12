@@ -26,14 +26,14 @@ public class Pearl : MonoBehaviour
             Counter.instance.IncreasePearls(value);
         }
 
-        if(collision.tag == "Player")
-        {
-            var healthComponent = collision.GetComponent<healthManager>();
-            if(healthComponent != null)
-            {
-                healthComponent.TakeDamage(1);
-                Debug.Log("Collision");
-            }
-        }
+        //if(collision.tag == "Player")
+        //{
+        //    var healthComponent = collision.GetComponent<healthManager>();
+        //    if(healthComponent != null)
+        //    {
+        //        healthComponent.TakeDamage(1);
+        //        Debug.Log("Collision");
+        //    }
+        //}
     }
 }
