@@ -66,7 +66,7 @@ public class Morenas : MonoBehaviour
             transform.position = targetPosition;
 
             // Respawn al punto original después de llegar a cualquier punto
-            yield return new WaitForSeconds(Random.Range(waitTimeMin, waitTimeMax)); // Espera aleatoria en el punto de destino
+            //yield return new WaitForSeconds(Random.Range(waitTimeMin, waitTimeMax)); // Espera aleatoria en el punto de destino
             transform.position = initialPosition; // Regresar al punto original
 
             // Una vez llegado a su posición inicial, indicamos que ha terminado de moverse
