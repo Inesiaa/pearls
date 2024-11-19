@@ -9,6 +9,7 @@ public class GranMorena : MonoBehaviour
     public float moveSpeed = 3f;          // Velocidad de movimiento del enemigo
     public float waitTimeMin = 1f;        // Tiempo mínimo de espera en cada punto
     public float waitTimeMax = 3f;        // Tiempo máximo de espera en cada punto
+    public float rotationSpeed = 5f;      // Velocidad de rotación para que se oriente suavemente
     private bool isMoving = false;        // Bandera para controlar si el enemigo está en movimiento
 
     void Start()
@@ -70,12 +71,24 @@ public class GranMorena : MonoBehaviour
             float journeyLength = Vector3.Distance(startPosition, targetPosition);
             float startTime = Time.time;
 
-            // Mover al enemigo a su destino
+            // Mientras el enemigo no haya llegado al punto de destino
             while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
             {
+                // Mover al enemigo hacia el destino
                 float distanceCovered = (Time.time - startTime) * moveSpeed;
                 float fractionOfJourney = distanceCovered / journeyLength;
+
+                // Movimiento hacia el objetivo
                 transform.position = Vector3.Lerp(startPosition, targetPosition, fractionOfJourney);
+
+                // Rotar suavemente hacia el destino
+                Vector3 direction = targetPosition - transform.position;
+                if (direction != Vector3.zero)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);  // Calcula la rotación necesaria
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);  // Rotación suave
+                }
+
                 yield return null;
             }
 
@@ -83,16 +96,12 @@ public class GranMorena : MonoBehaviour
             transform.position = targetPosition;
 
             // Después de llegar al destino, respawnear en un punto aleatorio de la misma fila
-            //yield return new WaitForSeconds(Random.Range(waitTimeMin, waitTimeMax)); // Espera aleatoria en el punto de destino
-
             if (IsInRow(row1Points))
             {
-                // Si el enemigo está en la fila 1, seleccionamos un punto aleatorio dentro de la fila 1
                 transform.position = row1Points[Random.Range(0, row1Points.Length)].position;
             }
             else
             {
-                // Si el enemigo está en la fila 2, seleccionamos un punto aleatorio dentro de la fila 2
                 transform.position = row2Points[Random.Range(0, row2Points.Length)].position;
             }
 
@@ -106,7 +115,7 @@ public class GranMorena : MonoBehaviour
     {
         foreach (Transform point in row)
         {
-            if (transform.position == point.position)
+            if (Vector3.Distance(transform.position, point.position) < 0.1f)
                 return true;
         }
         return false;
@@ -114,15 +123,14 @@ public class GranMorena : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             var healthComponent = collision.GetComponent<healthManager>();
             if (healthComponent != null)
             {
                 healthComponent.TakeDamage(1);
-                //Debug.Log("Collision");
             }
         }
     }
 }
+
