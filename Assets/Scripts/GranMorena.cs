@@ -9,7 +9,7 @@ public class GranMorena : MonoBehaviour
     public float moveSpeed = 3f;          // Velocidad de movimiento del enemigo
     public float waitTimeMin = 1f;        // Tiempo mínimo de espera en cada punto
     public float waitTimeMax = 3f;        // Tiempo máximo de espera en cada punto
-    public float rotationSpeed = 5f;      // Velocidad de rotación para que se oriente suavemente
+    //public float rotationSpeed = 5f;      // Velocidad de rotación para que se oriente suavemente
     private bool isMoving = false;        // Bandera para controlar si el enemigo está en movimiento
 
     void Start()
@@ -81,13 +81,13 @@ public class GranMorena : MonoBehaviour
                 // Movimiento hacia el objetivo
                 transform.position = Vector3.Lerp(startPosition, targetPosition, fractionOfJourney);
 
-                // Rotar suavemente hacia el destino
-                Vector3 direction = targetPosition - transform.position;
-                if (direction != Vector3.zero)
-                {
-                    Quaternion targetRotation = Quaternion.LookRotation(direction);  // Calcula la rotación necesaria
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);  // Rotación suave
-                }
+                //// Rotar suavemente hacia el destino
+                //Vector3 direction = targetPosition - transform.position;
+                //if (direction != Vector3.zero)
+                //{
+                //    Quaternion targetRotation = Quaternion.LookRotation(direction);  // Calcula la rotación necesaria
+                //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);  // Rotación suave
+                //}
 
                 yield return null;
             }
@@ -121,6 +121,7 @@ public class GranMorena : MonoBehaviour
         return false;
     }
 
+    //Si entra en contacto con "player" quita 1 de vida al "healthManager" del jugador y le quita vida
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Player"))
